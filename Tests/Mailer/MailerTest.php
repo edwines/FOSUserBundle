@@ -87,7 +87,7 @@ class MailerTest extends TestCase
                 )
             ),
             $this->getMockBuilder('Symfony\Component\Routing\Generator\UrlGeneratorInterface')->getMock(),
-            $this->getTemplating(),
+            $this->getTwigEnvironment(),
             array(
                 'confirmation.template' => 'foo',
                 'resetting.template' => 'foo',
@@ -99,14 +99,14 @@ class MailerTest extends TestCase
         );
     }
 
-    private function getTemplating()
+    private function getTwigEnvironment()
     {
-        $templating = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')
+        $twig = $this->getMockBuilder('Twig\Environment')
             ->disableOriginalConstructor()
             ->getMock()
         ;
 
-        return $templating;
+        return $twig;
     }
 
     private function getUser($emailAddress)
